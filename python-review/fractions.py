@@ -34,5 +34,5 @@ class Fraction:
 			firstnum = self.num*other.num
 			secondnum = other.num*self.den
 
-			return firstnum == secondnum
+			return firstnum == secondnum 
 			
