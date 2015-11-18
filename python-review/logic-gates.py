@@ -9,7 +9,7 @@ class LogicGate:
 			return self.label
 
 		def getOutput(self):
-			self.outpout = self.performGateLogic()
+			self.output = self.performGateLogic()
 			return self.output 
 
 #inherits gate label from parent class LogicGate.
@@ -36,3 +36,16 @@ class UnaryGate(LogicGate): #only one input line
 
 		def getPin(self):
 			return int(input("Enter Pin B input for gate" + self.getLabel() + "-->"))
+
+class AndGate(BinaryGate):
+		def __init__(self,n):
+			super().__init__(n)
+
+		def performGateLogic(self):
+
+			a = self.getPinA()
+			b = self.getPinB()
+			if a == 1 and b == 1:
+				return 1
+			else:
+				return 0 
