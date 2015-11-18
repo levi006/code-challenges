@@ -1,3 +1,5 @@
+
+#general class for gates depending on number of input lines. 
 class LogicGate:
 		def __init__(self,n):
 			self.label = n
@@ -10,9 +12,12 @@ class LogicGate:
 			self.outpout = self.performGateLogic()
 			return self.output 
 
-class BinaryGate(LogicGate):
+#inherits gate label from parent class LogicGate.
+#adds ability to get the values from two input lines. 
+#first line of the constructor calls upon the parent class. 
+class BinaryGate(LogicGate): 
 		def __init__(self,n):
-			super().__init__(n)
+			super().__init__(n) 
 
 			self.pinA = None
 			self.pinB = None
@@ -23,7 +28,7 @@ class BinaryGate(LogicGate):
 		def getPinB(self):
 			return int(input("Enter Pin B input for gate" + self.getLabel() + "-->"))
 
-class UnaryGate(LogicGate):
+class UnaryGate(LogicGate): #only one input line
 		def __init__(self,n):
 			super().__init__(n)
 
