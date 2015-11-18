@@ -1,5 +1,4 @@
 #From Python review in Data Structures and Algorithms
-#testing for SSH auth
 
 class Fraction: 
 	def __init__(self, top, bottom):
