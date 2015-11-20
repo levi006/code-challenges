@@ -51,5 +51,21 @@ def anagramSolution2(s1,s2):
 			pos = pos + 1
 		else:
 			matches = False 
-			
-	return matches 		
+
+	return matches 	
+
+
+#Count and Compare
+
+#Any two anagrams will have the same number of a's, b's, c's, etc. 
+#To decide if two strings are anagrams, count the number of times a character occurs. 
+#Use 26 counters for each possible character. 
+#If the two lists are identical at the end, the strings are anagrams. 
+
+def anagramSolution3(s1,s2):
+	c1 = [0]*26
+	c2 = [0]*26
+
+	for i in range(len(s1)):
+		pos = ord()
+
