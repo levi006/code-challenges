@@ -28,7 +28,7 @@ class BinaryGate(LogicGate):
 		def getPinB(self):
 			return int(input("Enter Pin B input for gate" + self.getLabel() + "-->"))
 
-class UnaryGate(LogicGate): #only one input line
+class UnaryGate(LogicGate): #subclass of LogicGate, with only one input line.
 		def __init__(self,n):
 			super().__init__(n)
 
@@ -49,3 +49,5 @@ class AndGate(BinaryGate):
 				return 1
 			else:
 				return 0 
+
+
