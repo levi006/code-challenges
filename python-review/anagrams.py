@@ -29,3 +29,27 @@ def anagramSolution(s1,s2):
 		pos1 = pos1 + 1
 
 	return stillOK 
+
+#Sort and Compare: 
+
+#Anagrams are anagrams if they consist of exactly the same characters. 
+#Sort each string alphabetically, from A to Z. If the two strings are equal, then they're anagrams. 
+#Python sort method is O(n^2) or O(nlogn), so this algorithm will have the same runtime as the sorting process.
+
+def anagramSolution2(s1,s2):
+	alist1 = list(s1) 
+	alist2 = list(s2)
+
+	alist1.sort()
+	alist2.sort()
+
+	pos = 0
+	matches = True
+
+	while pos < len(s1) and matches:
+		if alist1[pos]==alist2[pos]:
+			pos = pos + 1
+		else:
+			matches = False 
+			
+	return matches 		
