@@ -64,4 +64,34 @@ def getRightChild(root):
 attributes for the root value, as well as the left and right subtrees. Since this representation more closely follows 
 the object-oriented programming paradigm, we will continue to use this representation for the remainder of the chapter."""
 
+class BinaryTree:
+
+    def __init__(self,rootObj):
+
+        self.key = rootObj
+        self.leftChild = None
+        self.rightChild = None
+
+# To add a left child to the tree, create a new binary tree object and set the left attribute of the root to refer to this new object.
+	
+def insertLeft(self,newNode):
+
+    if self.leftChild == None: #adds child to the tree
+        self.leftChild = BinaryTree(newNode)
+    else:
+        tree = BinaryTree(newNode) #pushes the existing child down one level in the tree
+        tree.leftChild = self.leftChild
+        self.leftChild = tree
+
+def getRightChild(self):
+    return self.rightChild
+
+def getLeftChild(self):
+    return self.leftChild
+
+def setRootVal(self,obj):
+    self.key = obj
+
+def getRootVal(self):
+    return self.key
 
