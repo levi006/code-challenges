@@ -56,6 +56,21 @@ def getLeftChild(root):
 def getRightChild(root):
     return root[2]
 
+"""Why use .insert vs. append? 
+
+A list is implemented by an array of pointers to the objects it contains.
+
+Every time you call 'insert(0, indx)', all of the pointers already in the list have to be moved up once position
+before the new one can be inserted at the beginning.
+
+When you call 'append(indx)' the pointers only have to be copied if there isn't enough space in the currently allocated
+block for the new element. If there is space then there is no need to copy the existing elements, just put the new element
+on the end and update the length field. Whenever a new block does have to be allocated that particular append will be no faster
+than an insert, but some extra space will be allocated just in case you do wish to extend the list further.
+
+If you expected insert to be faster, perhaps you thought that Python used a linked-list implementation. It doesn't do this, 
+because in practice (for most applications) a list based implementation gives better performance."""
+
 #				Node and References Reperesentations of Binary Trees
 
 ################################################################################################
@@ -94,4 +109,6 @@ def setRootVal(self,obj):
 
 def getRootVal(self):
     return self.key
+
+
 
