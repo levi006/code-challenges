@@ -14,20 +14,26 @@ False
 
 """
 
-def is_isogram(string):
-    lower_string = string.lower()
-    seen = []
+# def is_isogram(string):
+#     lower_string = string.lower()
+#     seen = []
     
-    for i in range(len(lower_string)):
-        if lower_string[i] not in seen:
-            seen.append(lower_string[i])
-        elif lower_string[i] in seen:
-            return False
-    return True
+#     for i in range(len(lower_string)):
+#         if lower_string[i] not in seen:
+#             seen.append(lower_string[i])
+#         elif lower_string[i] in seen:
+#             return False
+#     return True
 
+
+def is_isogram(string):
+	if len(set(string.lower())) == len(string.lower()):
+		return True
+	else:
+		return False
 
 if __name__ == "__main__":
 
 	import doctest
 	if doctest.testmod().failed == 0:
-        print "\n*** ALL TESTS PASSED. GO YOU!\n"
+		print "\n*** ALL TESTS PASSED. GO YOU!\n"
