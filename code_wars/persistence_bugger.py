@@ -29,7 +29,11 @@ def persistence(n):
 	return product_int	
 
 def multiply(product):	
+<<<<<<< HEAD
 	while len(str(product)) != 1:
+=======
+	while len(str(product)) > 1:
+>>>>>>> 5e8fbd2553ee6400a5f804ac994715a9b61ebaab
 		multiply(product)
 	else: 
 		return product
