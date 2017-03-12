@@ -21,6 +21,8 @@ def race(v1, v2, v1_lead):
 	if v1 >= v2:
 		return None
 
+	distance_2 = distance_1 + v1_lead 
+
 	while distance_1 < distance_2
 
 
