@@ -15,18 +15,30 @@ Tower block is represented as *
 
 """
 
-def tower_builder(n_floors):
-    tower = []
-    indent = " "
-    n = n_floors
-    for i in range(n_floors):
-        n = n -1
-        # print(n)
-        floor = indent*(n) + "*"*((i*2)+1) + indent*(n)
-        tower.append(floor)
-#         print(tower)
-    return tower
+# def tower_builder(n_floors):
+#     tower = []
+#     indent = " "
+#     n = n_floors
+#     for i in range(n_floors):
+#         n = n -1
+#         # print(n)
+#         floor = indent*(n) + "*"*((i*2)+1) + indent*(n)
+#         tower.append(floor)
+# #         print(tower)
+#     return tower
 
+def tower_builder(n_floors):
+    if n_floors == 0:
+        return []
+
+    tower = []
+
+    for i in range(1, n_floors + 1):
+      stars = '*' * (2 * i - 1)
+      space = ' ' * (n_floors - i)
+      tower.append(space + stars + space)
+    
+    return tower
 
 if __name__ == "__main__":
     import doctest
