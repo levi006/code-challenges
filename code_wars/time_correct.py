@@ -38,35 +38,33 @@ def time_correct(t):
         return None
 
     if ":" in t:
-    	h, m, s = t.strip().split(":")
+    	h, m, s = map(int,t.strip().split(":"))
 
     else:
     	return 
 
-    hrs, mins, secs = int(h), int(m), int(s)
+    if s >= 60:
+    	s = s%60
+    	m = m + 1
+    elif s < 10:
+    	s = "0" + str(s)
 
-    if secs >= 60:
-    	secs = secs%60
-    	mins = mins + 1
-    elif secs < 10:
-    	secs = "0" + str(secs)
+    if m >= 60:
+        m = m%60
+        h = h + 1
+    if m < 10:
+    	m = "0" + str(m)
+    if m == 0:
+        m = "00"
 
-    if mins >= 60:
-        mins = mins%60
-        hrs = hrs + 1
-    if mins < 10:
-    	mins = "0" + str(mins)
-    if mins == 0:
-        mins = "00"
+    if h > 24:
+        h = h%24
+    if h < 10:
+        h = "0" + str(h)
+    elif h == 24:
+        h = "00"
 
-    if hrs > 24:
-        hrs = hrs%24
-    if hrs < 10:
-        hrs = "0" + str(hrs)
-    elif hrs == 24:
-        hrs = "00"
-
-    time = str(hrs) + ":" + str(mins) + ":" + str(secs) 
+    time = str(h) + ":" + str(m) + ":" + str(s) 
 
     return time
 
