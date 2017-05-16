@@ -15,6 +15,19 @@ If the time-string-format is invalid, return null. (empty string for C++)
 
 >>> time_correct(" ")
 ' '
+
+>>> time_correct("09:10:01")
+"09:10:01"
+
+>>> time_correct("11:70:10")
+"12:10:10"
+
+>>> time_correct("19:99:99")
+"20:40:39"
+
+>>> time_correct("24:01:01")
+"00:01:01"
+
 """
 
 def time_correct(t):
