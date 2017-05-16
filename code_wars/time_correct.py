@@ -13,10 +13,19 @@ Some examples:
 If the input-string is null or empty return exactly this value! (empty string for C++)
 If the time-string-format is invalid, return null. (empty string for C++)
 
+>>> time_correct(" ")
+' '
 """
 
 def time_correct(t):
-    if t = "":
-        return ""
-    if t = None:
+    if t == " ":
+        return " "
+    
+    if t == None:
         return None
+
+
+if __name__ == '__main__':
+    import doctest
+    if doctest.testmod().failed == 0:
+        print "\n*** ALL TESTS PASSED. !\n"
