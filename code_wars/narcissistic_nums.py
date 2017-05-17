@@ -1,7 +1,4 @@
-def narcissistic( value ):
-    if value < 10:
-        return True
-    
+def narcissistic(value):
     str_nums = str(value)
     
     total = 0
@@ -9,7 +6,9 @@ def narcissistic( value ):
     for num in str_nums:
         total = int(num)**power + total
 
-    if total == value:
-        return True
-    else:
-        return False
+    return total == value
+
+print narcissistic(7)
+print narcissistic(371)
+print narcissistic(122)
+print narcissistic(4887)
