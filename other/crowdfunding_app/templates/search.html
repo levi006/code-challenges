@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block blurb %}Here are the results of your search.{% endblock %}
+{% block searchbar %}
+
+<div class="container" id="campaign-grid">
+	<div class="row">
+	{% for data in data.response %}					
+		<div class="col-md-4">
+			<div class="panel panel-danger">
+			  <div class="panel-heading" align="center">
+			  	<a href={{data.web_url}}>
+			  	{{data.title}}
+			  	</a>
+			  </div>
+			  <div class="panel-body" align="center">
+			  	<img src={{data.image_types.small}}>
+			  </div>
+			  <div class="panel-footer">
+			  	{{data.tagline}}
+			  </div>
+			</div>
+		</div>
+	{% endfor %} 
+	</div>	
+</div>
+{% endblock %}

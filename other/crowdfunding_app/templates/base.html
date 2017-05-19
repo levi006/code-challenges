@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>IndieGoGo Challenge</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head> 
+    
+    <style>
+    .header {
+        margin-top: 8px;
+        font-size: 1.2em;
+    }
+    .col-md-4:nth-child(3n+1){
+    clear: left;
+    }
+
+    .indiegogo-logo {
+        display: inline-block;
+        height: auto;
+        width: 150px;
+    }
+
+    .directions{
+        display: inline-block;
+    }
+
+
+
+    </style>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-5 col-md-1">
+                    <a href="/"><img class="indiegogo-logo" src="static/img/indiegogo.png"></a>
+                </div>
+                <div class="col-xs-7 col-md-11">
+                        <h2 class="text-center header">{% block blurb %}HELPFUL GREETINGS OR DIRECTIONS GO HERE{% endblock %}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <hr>
+                <form class="form-inline row" action="/search">
+                    <div class='form-group col-sm-4'>
+                        <label class="control-label" for="focusedInput">Title: </label>
+                        <input class="form-control" id="focusedInput" type="text" name="title-search" placeholder="ex. save the bunnies">
+                    </div>
+                    <div class='form-group col-sm-4'>
+                        <label class="control-label" for="focusedInput">Tagline: </label>
+                        <input class="form-control" id="focusedInput" type="text" name="tagline-search" placeholder="ex. bc bunnies r cute">
+                    </div>
+                    <div class='form-group col-sm-4'>
+                        <button type="button|submit|reset" class="btn btn-default">Submit</button>
+                    </div>
+                </form>
+                <hr>
+                <div class="row"></div>
+                {% block searchbar %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>
