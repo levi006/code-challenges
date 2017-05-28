@@ -1,8 +1,9 @@
+import sys, json
 from pprint import pprint
 
 def scheduler(course_catalog):
-    with open(sys.argv[1]) as data_file:    
-        course_catalog = json.load(data_file)
+    with open(sys.argv[1]) as schedule_data:    
+        course_catalog = json.load(schedule_data)
 
     sorted_schedule = []
 
