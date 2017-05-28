@@ -45,6 +45,7 @@ def topolgical_sort(graph_unsorted):
         acyclic = False
         for node, edges in list(graph_unsorted.items()):
             for edge in edges:
+                print("node: ", node, "edge: ", edge)
                 if edge in graph_unsorted:
                     break
             else:
