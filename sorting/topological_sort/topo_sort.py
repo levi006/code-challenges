@@ -9,7 +9,7 @@ graph_unsorted = [(2, []),
                   (8, [9]),
                   (3, [10, 8])]
 
-def topolgical_sort(graph_unsorted):
+def topological_sort(graph_unsorted):
     """
     Repeatedly go through all of the nodes in the graph, moving each of
     the nodes that has all its edges resolved, onto a sequence that
