@@ -62,4 +62,4 @@ def topological_sort(graph_unsorted):
 
     return graph_sorted
 
-pprint(topolgical_sort(graph_unsorted))
+pprint(topological_sort(graph_unsorted))
