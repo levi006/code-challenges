@@ -1,8 +1,8 @@
 ## Design Notes
 
-As I worked through this solution, I decided to separate out the logic determining whether prerequisites had been met into what would become the ```add_when_ready``` function.
+As I worked through this solution, I decided to separate the logic determining whether prerequisites had been met from the main ```scheduler``` function into the ```add_when_ready``` function.
 
-The main ```scheduler``` function loads the json data files as a list and checks if the list is empty. If there are courses in the list, the ```add_ready_course``` function is called to check the prerequisites of the course against the ```sorted_schedule```. 
+The ```scheduler``` function loads the json data files as a list and checks if the list is empty. If there are courses in the list, the ```add_ready_course``` function is called to check the prerequisites of the course against the ```sorted_schedule```. 
 
 Courses with no prerequisites would be the first items added to the ```sorted_schedule``` list. To handle the courses with prerequisites, I needed to check if each course prerequisite was already present in ```sorted_schedule```.  I decided use set math to solve this, as it seemed like a natural set math problem -- was a set of prereqs already in, or a subset of ```sorted_schedule```?     
 
