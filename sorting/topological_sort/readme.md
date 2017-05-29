@@ -34,14 +34,14 @@ Relativity
 ## Running the Script
 
 Run scheduler on a json file, such as the ```physics.json``` or ```math.json``` files. 
-(Note: the json files be properly formed, with each object having ```name``` and ```prerequisite``` keys.) 
+(Note: the json files should be properly formed as an array of dictionaries, with each dictionary having ```name```:(string) and ```prerequisite```:(list of strings) keys.) 
 
 ```./scheduler physics.json```
 
 If you encounter a ```-bash: ./scheduler: Permission denied``` error, change the file permissions using:
  ```chmod a+x [filename]```. 
 
-```chmod a+x scheduler`` changes the permissions for all users and turns on executable permissions for all users.  
+```chmod a+x scheduler``` changes the permissions for all users and turns on executable permissions for all users.  
 
 ## Performance Analysis
 
