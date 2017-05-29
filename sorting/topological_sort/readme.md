@@ -1,4 +1,4 @@
-# Design Notes
+## Design Notes
 
 When writing this solution, I separated out what would become the ```add_when_ready``` function from the rest of the solution. The main scheduler function loads the json data files as a list and checks if the list is empty. If there are course dictionaries in the list, the first step was to check if there were any courses with no prerequisites; these would be the first items added to the ```sorted_schedule``` list and removed from the ```courses_reqs``` list. 
 
@@ -11,7 +11,7 @@ Moving into courses with prerequisites, I needed to check if each course prerequ
 If we have checked every course in the courses_reqs list but are unable to add a course to sorted_schedule, that means that the prerequisites in sorted_schedule do not match the dependencies of the remaining courses in courses_reqs list. Instead of getting stuck in an infinite loop, we raise an error. 
 
 
-# Performance Analysis
+## Performance Analysis
 
 The runtime of this approach can be improved -- we are looping over the input data twice using a while loop and a for loop nested inside the while loop, so we are already looking at quadratic runtime. However, within the for loop we are also creating a set and checking if every course in the prereqs subset is present in ```sorted_schedule```, and at best this will be O(n) as we're checking every item in the course_reqs list. 
 
