@@ -4,9 +4,17 @@ import sys, json
 
 def add_ready_courses(courses_reqs, sorted_schedule):
     """ 
-    add_ready_courses checks if the prerequisites of a course are present in\r sorted_schedule using set math. If so, that means the course can be added to sorted_schedule. Once added,\r the course is deleted from the courses_reqs list so we don't end up checking it again, and we exit the \rfunction and hop back into the while loop in scheduler().  
+    add_ready_courses checks if the prerequisites of a course are present in
+    sorted_schedule using set math. If so, that means the course can be added 
+    to sorted_schedule. Once added, the course is deleted from the courses_reqs 
+    list so we don't end up checking it again, and we exit the function and 
+    hop back into the while loop in scheduler().  
 
-    If we have checked every course in the courses_reqs list but are unable \r to add a course to sorted_schedule, that means that the prerequisites in sorted_schedule do \r not match the dependencies of the remaining courses in courses_reqs list. Instead of getting stuck in an \r infinite loop, we raise an error.  
+    If we have checked every course in the courses_reqs list but are unable 
+    to add a course to sorted_schedule, that means that the prerequisites 
+    in sorted_schedule do not match the dependencies of the remaining courses 
+    in courses_reqs list. Instead of getting stuck in an infinite loop, 
+    we raise an error.  
 
     """
 
@@ -23,12 +31,19 @@ def add_ready_courses(courses_reqs, sorted_schedule):
             
             return
 
-    # if we've gone through the entire course catalog and nothing could be resolved, \r but there are still courses in the catalog, we've hit a circular dependency 
+    # if we've gone through the entire course catalog and nothing could be resolved,
+    #but there are still courses in the catalog, we've hit a circular dependency 
     raise RuntimeError("Error: unresolvable loop in requirements")
 
 def scheduler(filename):
     """
-    Scheduler is the main function -- it loads json data and creates a 'courses_reqs' \r list of courses and their requirements. While there are courses in the courses_reqs list, each course \r will be processed by the add_ready_courses function. If the requirements of a course are present in \r sorted_schedule, the course name will be appended to sorted_schedule. If all the courses in the courses_reqs \r list have been added to sorted_schedule and courses_reqs is empty, the courses in sorted_schedule \r will print out, each course on a new line.   
+    Scheduler is the main function -- it loads json data and creates a 'courses_reqs'
+    list of courses and their requirements. While there are courses in the courses_reqs 
+    list, each course will be processed by the add_ready_courses function. If the 
+    requirements of a course are present in sorted_schedule, the course name will be
+    appended to sorted_schedule. If all the courses in the courses_reqs list have been
+    added to sorted_schedule and courses_reqs is empty, the courses in sorted_schedule
+    will print out, each course on a new line.   
 
     """
 
