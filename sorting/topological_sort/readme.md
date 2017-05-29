@@ -1,8 +1,10 @@
 ## Design Notes
 
-I separated out what would become the ```add_when_ready``` function from the main ```scheduler``` function.  ```scheduler``` loads the json data files as a list and checks if the list is empty. If there are courses in the list, the ```add_ready_course``` function is called to check the prerequisites of the course against the ```sorted_schedule```. Courses with no prerequisites would be the first items added to the ```sorted_schedule``` list. 
+As I worked through this solution, I decided to separate out the logic determining whether prerequisites had been met into what would become the ```add_when_ready``` function.
 
-Moving into courses with prerequisites, I needed to check if each course prerequisite was already present in ```sorted_schedule```.  like a natural set math problem -- was the group of prereqs already in ```sorted_schedule```?  
+The main ```scheduler``` function loads the json data files as a list and checks if the list is empty. If there are courses in the list, the ```add_ready_course``` function is called to check the prerequisites of the course against the ```sorted_schedule```. 
+
+Courses with no prerequisites would be the first items added to the ```sorted_schedule``` list. To handle the courses with prerequisites, I needed to check if each course prerequisite was already present in ```sorted_schedule```.  I decided use set math to solve this, as it seemed like a natural set math problem -- was a set of prereqs already in, or a subset of ```sorted_schedule```?     
 
 ## Functions
 ```scheduler``` is the main function -- it loads json data and creates a ```courses_reqs``` list of courses and their requirements. While there are courses in the ```courses_reqs``` list, each course will be processed by the ```add_ready_courses``` function, explained below. If the requirements of a course are present in ```sorted_schedule```, the course name will be appended to ```sorted_schedule```. 
@@ -32,6 +34,6 @@ Relativity
 
 ## Performance Analysis
 
-The runtime of this approach can be improved -- we are looping over the input data twice using a while loop and a for loop nested inside the while loop, so we are already looking at quadratic runtime. However, within the for loop we are also creating a set and checking if every course in the prereqs subset is present in ```sorted_schedule```, and at best this will be O(n) as we're checking every item in the course_reqs list. 
+The runtime of this approach can be improved -- we are looping over the input data twice using a while loop and a for loop nested inside the while loop, so we are looking at quadratic runtime. However, within the for loop we are also creating a set and checking if every course in the prereqs subset is present in ```sorted_schedule```, and at best this will be O(n) as we're checking every item in the course_reqs list. 
 
-Final runtime is O(n^2) + O(n), which can be reduced to O(n^2).
+ Runtime is O(n^2) + O(n), which can be reduced to O(n^2).
