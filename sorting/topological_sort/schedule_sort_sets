@@ -1,50 +1,57 @@
 #!/usr/bin/env python
 
-""" ... """
-
 import sys, json
 
-# courses_reqs
+def add_ready_courses(courses_reqs, sorted_schedule):
+    """ 
+    add_ready_courses checks if the prerequisites of a course are present in\r sorted_schedule using set math. If so, that means the course can be added to sorted_schedule. Once added,\r the course is deleted from the courses_reqs list so we don't end up checking it again, and we exit the \rfunction and hop back into the while loop in scheduler().  
 
-def add_ready_courses(course_catalog, sorted_schedule):
-    """ ... """
+    If we have checked every course in the courses_reqs list but are unable \r to add a course to sorted_schedule, that means that the prerequisites in sorted_schedule do \r not match the dependencies of the remaining courses in courses_reqs list. Instead of getting stuck in an \r infinite loop, we raise an error.  
 
-    for idx, course in enumerate(course_catalog):
+    """
+
+    for idx, course in enumerate(courses_reqs):
         prereqs = course['prerequisites']
         name = course['name']
 
         # if prereqs == [] or set(prereqs).issubset(sorted_schedule):
         if set(prereqs).issubset(sorted_schedule):
             sorted_schedule.append(name)
-            # NOW CAN DELETE THIS FROM CATALOG
-            del course_catalog[idx]
+            
+            # delete course from the courses_reqs list 
+            del courses_reqs[idx]
+            
             return
 
-    # Oh no, went through entire catalog and nothing could
-    # be resolved
-
+    # if we've gone through the entire course catalog and nothing could be resolved, \r but there are still courses in the catalog, we've hit a circular dependency 
     raise RuntimeError("Error: unresolvable loop in requirements")
 
 def scheduler(filename):
-    """ ... """
+    """
+    Scheduler is the main function -- it loads json data and creates a 'courses_reqs' \r list of courses and their requirements. While there are courses in the courses_reqs list, each course \r will be processed by the add_ready_courses function. If the requirements of a course are present in \r sorted_schedule, the course name will be appended to sorted_schedule. If all the courses in the courses_reqs \r list have been added to sorted_schedule and courses_reqs is empty, the courses in sorted_schedule \r will print out, each course on a new line.   
+
+    """
 
     with open(filename) as schedule_data:    
-        course_catalog = json.load(schedule_data)
+        courses_reqs = json.load(schedule_data)
 
-    # List of courses as can  be performed
+    # list of courses that have had their prerequisites met/dependencies resolved
     sorted_schedule = []
 
-    if course_catalog == [] or course_catalog == None:
+    if courses_reqs == [] or courses_reqs == None:
         raise ValueError("No argument provided")
 
-    while course_catalog != []:
-        add_ready_courses(course_catalog, sorted_schedule)
-        # print "re-looping"
+    while courses_reqs != []:
+        add_ready_courses(courses_reqs, sorted_schedule)
 
+    # prints courses on new line
     for course in sorted_schedule:
         print(course)
 
-    return sorted_schedule
+    return
 
-json_filename = sys.argv[1] if len(sys.argv) > 1 else "../../../clever/math.json"
+# ensures that json file is read as second argument in command line
+if len(sys.argv) > 1:
+    json_filename = sys.argv[1]
+
 scheduler(json_filename)
