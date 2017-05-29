@@ -1,15 +1,15 @@
 ## General Strategy
 
-As I worked through this solution, I knew I would need to loop over every course in a work list (the ```course_reqs``` list) and find the courses that could be added to a results list (the ```sorted_schedule``` list).
+As I worked through this solution, I saw I would need to loop over every course in a work list (the ```course_reqs``` list) and find the courses that could be added to a results list (the ```sorted_schedule``` list).
 
 Once added, the course would be deleted from the work list and I would repeat the loop over the remaining courses in the work list while there were still courses remaining. Courses with no prerequisites would be the first items added to the ```sorted_schedule``` list. 
 
-I decided to keep the main while loop in the ```scheduler``` function and separate out the logic determining whether a course's prerequisites were all present into the ```add_ready_courses``` function. Within ```add_ready_courses```, we loop over the courses and use set math to find if a set of prerequisites was already in, or a subset of ```sorted_schedule```. The loop continues until there are no more courses remaining, or until we've looped over all the courses but are unable to add a course to the ```sorted_schedule```.       
+I decided to keep the main while loop in the ```scheduler``` function and separate out the logic determining whether a course's prerequisites were all present into the ```add_ready_courses``` function. Within ```add_ready_courses```, we loop over the courses and use set math to find if a course can be added to the sorted schedule. The loop continues until there are no more courses remaining, or until we've looped over all the courses but are unable to add a course to the ```sorted_schedule```.       
 
 ## Functions
 ```scheduler``` is the main function -- it loads json data and creates a ```courses_reqs``` list of courses and their requirements. While there are courses in the ```courses_reqs``` list, each course will be processed by the ```add_ready_courses``` function, explained below. If the requirements of a course are present in ```sorted_schedule```, the course name will be appended to ```sorted_schedule```. 
 
-```add_ready_courses``` checks if the prerequisites of a course are present in sorted_schedule using set math. If so, that means the course can be added to sorted_schedule. Once added, the course is deleted from the ```courses_reqs``` list so we don't end up checking it again, and we exit the function and hop back into the while loop in ```scheduler```.  
+```add_ready_courses``` checks if the prerequisites of a course are present in sorted_schedule using set math (is a set of prerequisites already in, or a subset of ```sorted_schedule```?). If so, that means the course can be added to sorted_schedule. Once added, the course is deleted from the ```courses_reqs``` list so we don't end up checking it again, and we exit the function and hop back into the while loop in ```scheduler```.  
 
 If we have checked every course in the ```courses_reqs``` list but are unable to add a course to ```sorted_schedule```, that means that the prerequisites in ```sorted_schedule``` do not match the dependencies of the remaining courses in ```courses_reqs```. Instead of getting stuck in an infinite loop, we raise an error.
 
