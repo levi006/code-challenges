@@ -9,9 +9,9 @@ Moving into courses with prerequisites, I needed to check if each course prerequ
 
 If all the courses in ```courses_reqs``` have been added to ```sorted_schedule``` and ```courses_reqs``` is empty, the courses in ```sorted_schedule``` will print the results, with each course on a new line. 
 
-```add_ready_courses`` checks if the prerequisites of a course are present in sorted_schedule using set math. If so, that means the course can be added to sorted_schedule. Once added, the course is deleted from the ```courses_reqs``` list so we don't end up checking it again, and we exit the function and hop back into the while loop in ```scheduler```.  
+```add_ready_courses``` checks if the prerequisites of a course are present in sorted_schedule using set math. If so, that means the course can be added to sorted_schedule. Once added, the course is deleted from the ```courses_reqs``` list so we don't end up checking it again, and we exit the function and hop back into the while loop in ```scheduler```.  
 
-If we have checked every course in the courses_reqs list but are unable to add a course to sorted_schedule, that means that the prerequisites in sorted_schedule do not match the dependencies of the remaining courses in ```courses_reqs```. Instead of getting stuck in an infinite loop, we raise an error. 
+If we have checked every course in the ```courses_reqs``` list but are unable to add a course to ```sorted_schedule```, that means that the prerequisites in ```sorted_schedule``` do not match the dependencies of the remaining courses in ```courses_reqs```. Instead of getting stuck in an infinite loop, we raise an error. 
 
 
 ## Performance Analysis
