@@ -34,7 +34,7 @@ Relativity
 ## Running the Script
 
 Run scheduler on a json file, such as the ```physics.json``` or ```math.json``` files. 
-(Note: the json files should be properly formed as an array of dictionaries, with each dictionary having ```name```:(string) and ```prerequisite```:(list of strings) keys.) 
+(Note: the json files should be properly formed as an array of dictionaries, with each dictionary having ```name:(string)``` and ```prerequisite:(list of strings)``` keys).
 
 ```./scheduler physics.json```
 
