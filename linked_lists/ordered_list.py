@@ -58,13 +58,24 @@ class OrderedList:
 			current = current.next
 		return False
 
-	def remove(elem):
+	def remove(self, elem):
 		"""
 		Takes a number and removes the first Node in the list whose elem is that number. If no such node exists, does nothing.
 		"""
-		pass
+		current = self.head
+		previous = None
 
-	def insert_pt(elem):
+		while True:
+			if current.elem == elem:
+				break
+			previous, current = current, current.next
+
+		if previous == None:
+			self.head = current.next
+		else:
+			previous.next = current.next
+
+	def insert_pt(self, elem):
 		"""
 		Takes a number and finds the Node in the list after which the number would be inserted. Used as a helper function to implement the step "find where [X] would be" in each of the other operations.
 
@@ -113,8 +124,13 @@ mylist.insert(6)
 print(mylist)
 print(mylist.find(5))
 print(mylist.find(67))
+print(mylist.insert(67))
+print(mylist)
+(mylist.remove(67))
+print(mylist)
+print(mylist.find(67))
 
-# if __name__ == '__main__':
-#     import doctest
-#     if doctest.testmod().failed == 0:
-#         print "\n*** ALL TESTS PASSED. NOTHING ESCAPES YOU!\n"
+if __name__ == '__main__':
+    import doctest
+    if doctest.testmod().failed == 0:
+        print "\n*** ALL TESTS PASSED. NOTHING ESCAPES YOU!\n"
