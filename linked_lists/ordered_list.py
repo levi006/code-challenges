@@ -57,12 +57,15 @@ class OrderedList:
 		>>> mylist
 		[1, 3, 5, 6, 7]
 
+		>>> mylist.find(6)
+
+
 		"""
 		current = self.head
 
 		while current is not None:
 			if current.elem == elem:
-				return True
+				return elem
 			if current.elem > elem:
 				return False
 			current = current.next
