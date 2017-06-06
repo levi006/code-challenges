@@ -14,20 +14,26 @@ class OrderedList:
 		"""
 		Takes a number, creates a new Node containing that number, and adds it to the list in the correct position, returning the Node that was created. A number that already exists in the list should be inserted before the first existing Node with that value.
 
-		>>> insert(1)
+		>>> mylist = OrderedList()
+		>>> mylist.insert(1)
+		>>> mylist
 		[1]
 
-		>>> insert(5)
-		[1,5]
+		>>> mylist.insert(5)
+		>>> mylist
+		[1, 5]
 
-		>>> insert(3)
-		[1,3,5]
+		>>> mylist.insert(3)
+		>>> mylist
+		[1, 3, 5]
 
-		>>> insert(7)
-		[1,3,5,7]
+		>>> mylist.insert(7)
+		>>> mylist
+		[1, 3, 5, 7]
 
-		>>> insert(6)
-		[1,3,5,6,7]
+		>>> mylist.insert(6)
+		>>> mylist
+		[1, 3, 5, 6, 7]
 
 		"""
 		current = self.head
@@ -47,6 +53,10 @@ class OrderedList:
 	def find(self, elem):
 		"""
 		Takes a number and finds the first Node in the list whose elem is that number. If no such node exists, returns null.
+
+		>>> mylist
+		[1, 3, 5, 6, 7]
+
 		"""
 		current = self.head
 
@@ -92,7 +102,11 @@ class OrderedList:
 		[1]
 		"""
 
-		pass
+		# current = self.head
+		# previous = None
+
+		# while current is not None:
+		# 	if current.elem == elem:
 
 	def list_to_data(self):
 		elem_list = []
@@ -121,14 +135,14 @@ mylist.insert(3)
 mylist.insert(5)
 mylist.insert(7)
 mylist.insert(6)
-print(mylist)
-print(mylist.find(5))
-print(mylist.find(67))
-print(mylist.insert(67))
-print(mylist)
-(mylist.remove(67))
-print(mylist)
-print(mylist.find(67))
+# print(mylist)
+# print(mylist.find(5))
+# print(mylist.find(67))
+# print(mylist.insert(67))
+# print(mylist)
+# print(mylist.remove(67))
+# print(mylist)
+# print(mylist.find(67))
 
 if __name__ == '__main__':
     import doctest
