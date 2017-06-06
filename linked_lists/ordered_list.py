@@ -47,6 +47,7 @@ class OrderedList:
 		temp = Node(elem)
 		if previous == None:
 			temp.next, self.head = self.head, temp
+		
 		else:
 			temp.next, previous.next = current, temp
 
@@ -58,7 +59,13 @@ class OrderedList:
 		[1, 3, 5, 6, 7]
 
 		>>> mylist.find(6)
+		6
 
+		>>> mylist.find(4) is None
+		True
+		
+		>>> mylist.find(8) is None
+		True
 
 		"""
 		current = self.head
@@ -66,9 +73,12 @@ class OrderedList:
 		while current is not None:
 			if current.elem == elem:
 				return elem
+			
 			if current.elem > elem:
-				return False
+				return None
+			
 			current = current.next
+		
 		return None
 
 	def remove(self, elem):
