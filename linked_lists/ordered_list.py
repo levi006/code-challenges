@@ -4,7 +4,7 @@ class Node:
 		self.next = next
 
 	def __repr__(self):
-		return "Node(%s)" % str(self.data)
+		return "Node(%s)" % str(self.elem)
 
 class OrderedList:
 	def __init__(self):
@@ -42,19 +42,27 @@ class OrderedList:
 		while current != None:
 			if current.elem > elem:
 				break
-			previous, current = current, current.next
+			previous = current
+			current = current.next
 
 		temp = Node(elem)
+		# adds Node to tail
 		if previous == None:
 			temp.next, self.head = self.head, temp
-		
+		# assigns new Node's next pointer to 
 		else:
 			temp.next, previous.next = current, temp
 
 	def find(self, elem):
 		"""
 		Takes a number and finds the first Node in the list whose elem is that number. If no such node exists, returns null.
-
+		
+		>>> mylist = OrderedList()
+		>>> mylist.insert(1)
+		>>> mylist.insert(3)
+		>>> mylist.insert(5)
+		>>> mylist.insert(6)
+		>>> mylist.insert(7)
 		>>> mylist
 		[1, 3, 5, 6, 7]
 
@@ -84,11 +92,36 @@ class OrderedList:
 	def remove(self, elem):
 		"""
 		Takes a number and removes the first Node in the list whose elem is that number. If no such node exists, does nothing.
+		
+		>>> mylist = OrderedList()
+		>>> mylist.insert(1)
+		>>> mylist.insert(3)
+		>>> mylist.insert(5)
+		>>> mylist.insert(6)
+		>>> mylist.insert(7)
+
+		>>> mylist
+		[1, 3, 5, 6, 7]
+
+		>>> mylist.remove(6)
+		>>> mylist
+		[1, 3, 5, 7]
+
+		>>> mylist.remove(4)
+		>>> mylist
+		[1, 3, 5, 7]
+
+		>>> mylist.remove(27)
+		>>> mylist
+		[1, 3, 5, 7]
+
 		"""
 		current = self.head
 		previous = None
 
 		while True:
+			if current is None:
+				return
 			if current.elem == elem:
 				break
 			previous, current = current, current.next
@@ -102,24 +135,49 @@ class OrderedList:
 		"""
 		Takes a number and finds the Node in the list after which the number would be inserted. Used as a helper function to implement the step "find where [X] would be" in each of the other operations.
 
-		>>> insert_pt(6)
-		[5]
+		>>> mylist = OrderedList()
+		>>> mylist.insert(1)
+		>>> mylist.insert(3)
+		>>> mylist.insert(5)
+		>>> mylist.insert(7)
 
-		>>> insert_pt(8)
-		[7]
+		>>> mylist
+		[1, 3, 5, 7]
 
-		>>> insert_pt(0)
-		[H]
+		>>> mylist.insert_pt(6)
+		5
 
-		>>> insert_pt(3)
-		[1]
+		>>> mylist.insert_pt(8)
+		7
+		>>> mylist.insert_pt(0)
+
+		
+		>>> mylist.insert_pt(3) is None
+		True
+
 		"""
 
-		# current = self.head
-		# previous = None
+		current = self.head
+		previous = None
 
-		# while current is not None:
-		# 	if current.elem == elem:
+		while current is not None:
+			# if insert pt is at beginning
+			print(current)
+
+			if current.elem < elem:
+				previous, current = current, current.next
+			# if insert pt is at end
+			if current is None:
+				return previous.elem
+			# if insert pt exists
+			if current.elem == elem:
+				return None
+
+			if current.elem > elem:
+				return previous.elem
+
+
+
 
 	def list_to_data(self):
 		elem_list = []
@@ -142,20 +200,6 @@ class OrderedList:
 		elem_list = self.list_to_data()
 		return "%s" % str(elem_list)
 
-mylist = OrderedList()
-mylist.insert(1)
-mylist.insert(3)
-mylist.insert(5)
-mylist.insert(7)
-mylist.insert(6)
-print(mylist)
-print(mylist.find(5))
-print(mylist.find(67))
-# print(mylist.insert(67))
-# print(mylist)
-# print(mylist.remove(67))
-# print(mylist)
-# print(mylist.find(67))
 
 if __name__ == '__main__':
     import doctest
