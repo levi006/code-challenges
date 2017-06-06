@@ -66,7 +66,7 @@ class OrderedList:
 			if current.elem > elem:
 				return False
 			current = current.next
-		return False
+		return None
 
 	def remove(self, elem):
 		"""
@@ -135,9 +135,9 @@ mylist.insert(3)
 mylist.insert(5)
 mylist.insert(7)
 mylist.insert(6)
-# print(mylist)
-# print(mylist.find(5))
-# print(mylist.find(67))
+print(mylist)
+print(mylist.find(5))
+print(mylist.find(67))
 # print(mylist.insert(67))
 # print(mylist)
 # print(mylist.remove(67))
