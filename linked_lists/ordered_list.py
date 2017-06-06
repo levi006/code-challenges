@@ -150,7 +150,7 @@ class OrderedList:
 		>>> mylist.insert_pt(8)
 		7
 		>>> mylist.insert_pt(0)
-
+		0
 		
 		>>> mylist.insert_pt(3) is None
 		True
@@ -161,21 +161,22 @@ class OrderedList:
 		previous = None
 
 		while current is not None:
-			# if insert pt is at beginning
-			print(current)
 
-			if current.elem < elem:
+			# if insert pt is at beginning
+			if current.elem > elem and previous == None:
+				return elem
+			
+			elif current.elem < elem:
 				previous, current = current, current.next
 			# if insert pt is at end
 			if current is None:
 				return previous.elem
-			# if insert pt exists
+			# if insert pt already exists
 			if current.elem == elem:
 				return None
 
 			if current.elem > elem:
 				return previous.elem
-
 
 
 
@@ -187,14 +188,6 @@ class OrderedList:
 			elem_list.append(current.elem)
 			current = current.next
 		return elem_list
-
-	def data_to_list(self, elem_list):
-		self.head = Node(elem_list[0])
-		current = self.head
-
-		for elem in elem_list[1:]:
-			current.next = Node(elem)
-			current = current.next
 
 	def __repr__(self):
 		elem_list = self.list_to_data()
