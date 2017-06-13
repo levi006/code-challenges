@@ -69,6 +69,8 @@ def check_sudoku(arr):
         return True
     else:
         return False
+    
+    return status
 
 def get_columns(matrix):
     """
@@ -112,12 +114,15 @@ def main(matrix):
     True
 
     """
-    for r in matrix:
-        check_sudoku(r)
-    for c in matrix:
-        check_sudoku(c)
-    check_subsquare(matrix)
-
+    while True:
+        for r in matrix:
+            check_sudoku(r)
+            print(status)
+        for c in matrix:
+            check_sudoku(c)
+        check_subsquare(matrix)
+    
+    return True
 
 
 
