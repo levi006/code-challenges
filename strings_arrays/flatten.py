@@ -51,6 +51,29 @@ def combine(L):
 
 	return list(pairs_dict.items())
 
+def combine_to_list(L):
+	"""
+		>>> combine_to_list([('Fyodor', 'Dmitri'), ('Fyodor', 'Ivan'), ('Fyodor', 'Alexei')])
+		[('Fyodor', ['Dmitri', 'Ivan', 'Alexei'])]
+
+		>>> combine_to_list([('a', 1), ('a', 2), ('a', 3), ('b', 4), ('b', 5), ('b', 6)])
+		[('a', [1, 2, 3]), ('b', [4, 5, 6])]
+	"""	
+
+	pairs_dict = {}
+
+	for parent, child in L:
+		
+		if parent not in pairs_dict:
+			pairs_dict[parent] = [child]
+
+		else:
+			pairs_dict[parent].append(child)
+
+	return list(pairs_dict.items())
+
+ 
+
 if __name__ == '__main__':
     import doctest
     if doctest.testmod().failed == 0:
