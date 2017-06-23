@@ -17,7 +17,6 @@ def fix_acct_num(acct_num):
         ValueError: Invalid account num: ABC123
     """
 
-
     if not acct_num.isdigit():
         raise ValueError("Invalid account num: " + acct_num)
 
@@ -25,6 +24,7 @@ def fix_acct_num(acct_num):
         acct_num = "%06d" % int(acct_num)
 
     return acct_num
+
 
 def fix_date(date):
     """Fix date: reformat 'Dec 1 2017' => '20171201'
@@ -42,16 +42,17 @@ def fix_date(date):
 
     return date
 
+
 def fix_address(address):
     """No cleanup needed for address.
     
         >>> fix_address('123 Main Street')
         '123 Main Street'
     """
-
     address = address.strip()
 
     return address
+
 
 def fix_zipcode(zipcode):
     """Zipcodes less than 5 digits long are padded with leading zeros. 
@@ -75,6 +76,7 @@ def fix_zipcode(zipcode):
         zipcode = "%05d" % int(zipcode)
 
     return zipcode
+
 
 def fix_consumption(consumption):
     """Validate consumption.
@@ -148,6 +150,7 @@ def extract_line_to_row(line):
     new_row = [acct_num, read_date, address, zipcode, consumption]
 
     return new_row
+
 
 def process_file(in_file, out_file, dupe_file):
     """Process CSV file, writing CSV output and duplicate-record output."""    
