@@ -1,47 +1,45 @@
 
 import csv, re, datetime
 
-def get_acct_num(raw_num):
-
-	acct_num = raw_num
+def fix_acct_num(acct_num):
 
 	if len(acct_num) <= 6:
-		valid_acct_num = "%06d" % int(acct_num)
+		acct_num = "%06d" % int(acct_num)
 
-	return valid_acct_num
+	return acct_num
 
-def get_date(raw_date):
+def fix_date(date):
 
-	stripped_date = raw_date.strip()
+	stripped_date = date.strip()
 	valid_date = datetime.datetime.strptime(stripped_date, "%b %d %Y").strftime("%Y%m%d")
 
 	return valid_date
 
-def get_address(raw_address):
+def fix_address(address):
 
-	address = raw_address.strip()
+	address = address.strip()
 
 	return address
 
-def get_zipcode(raw_zip):
+def fix_zipcode(zipcode):
 	"""Zipcodes less than 5 digits long are padded with leading zeros. """
 	
-	zc = raw_zip.strip()
+	zipcode = zipcode.strip()
 
-	if len(zc) <= 5:
-		valid_zc = "%05d" % int(zc)
+	if len(zipcode) <= 5:
+		zipcode = "%05d" % int(zipcode)
 
-	return valid_zc
+	return zipcode
 
-def get_consumption(raw_c):
+def fix_consumption(consumption):
 	"""Values containing commas are treated as string literals."""
 	
-	c = raw_c.strip()
-	if c.isdigit():
-		valid_c = int(raw_c)
+	consumption = consumption.strip()
+	if consumption.isdigit():
+		consumption = int(consumption)
 	else:
 		
-		sections = re.split('[^0-9]+', raw_c)
+		sections = re.split('[^0-9]+', consumption)
 		
 		num = " "
 		
@@ -49,9 +47,9 @@ def get_consumption(raw_c):
 			if section.isdigit():
 				num += section
 
-		valid_c = int(num)
+		consumption = int(num)
 
-	return valid_c
+	return consumption
 
 # transforms fixed width input file into csv
 with open('example_input.txt', 'r') as txt_file, open('transformed.csv', 'w') as csv_file:
@@ -63,21 +61,21 @@ with open('example_input.txt', 'r') as txt_file, open('transformed.csv', 'w') as
 
 	for line in txt_file:
 		
-		# defines columns in fixed width input file
-		raw_acct_num = line[0:6]
-		raw_date = line[6:17]
-		raw_address = line[21:44]
-		raw_zip = line[44:49]
-		raw_c = line[54:]
+		# defining columns in fixed width input file
+		acct_num = line[0:6]
+		date = line[6:17]
+		address = line[21:44]
+		zipcode = line[44:49]
+		consumption = line[54:]
 		
-		# normalizes functions for each column 
-		acct_num = get_acct_num(raw_acct_num)
-		read_date = get_date(raw_date)
-		address = get_address(raw_address)
-		zip_code = get_zipcode(raw_zip)
-		consumption = get_consumption(raw_c)
+		# normalizing functions for each column 
+		acct_num = fix_acct_num(acct_num)
+		read_date = fix_date(date)
+		address = fix_address(address)
+		zipcode = fix_zipcode(zipcode)
+		consumption = fix_consumption(consumption)
 
-		new_row = [acct_num, read_date, address, zip_code, consumption]
+		new_row = [acct_num, read_date, address, zipcode, consumption]
 		writer.writerow(new_row)
 
 		# records with the same account number and read date are logged as possible duplicates
