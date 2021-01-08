@@ -1,0 +1,33 @@
+select customer.name 
+from customer 
+  join "order" using (customer_id) 
+  join pizza using (pizza_id) 
+where order_date >= current_date - interval '30 days' 
+group by customer_id 
+having sum(quantity * price) >= ALL(
+   -- subquery: find total_spent by customers over last 30 days
+   select sum(quantity * price)  
+   from "order"  
+     join pizza using (pizza_id) 
+   where order_date >= current_date - interval '30 days' 
+   group by customer_id
+);
+
+- more complex, a little harder to write
+- find all people who have spent in last 30 days >= (all people's spending over last 30 days, by person)
+
+
+     SELECT customer_id,
+        customer.name,
+        sum(quantity * price) AS total_orders_cost
+       FROM customer
+         JOIN "order" USING (customer_id)
+         JOIN pizza USING (pizza_id)
+      WHERE order_date >= current_date - interval '30 days'
+      GROUP BY customer_id
+      ORDER BY total_orders_cost DESC
+     LIMIT 1;
+
+ - fast, easy to write
+ - downside:  you + me both $250
+

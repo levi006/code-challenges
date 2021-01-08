@@ -39,40 +39,73 @@
 # base case  =  cell only contains an integer
 # cell_contents = integer, integer + rc, rc + rc 
 
-input_arr = [
-    ["1",      "r0c0",   "4"     ],
-    ["r0c1+1", "r0c2+2", "5"     ],
-    ["r1c1+2", "r2c0+r1c0", "r0c2+1"],
-]
+# input_arr = [
+#     ["1",      "r0c0",   "4"     ],
+#     ["r0c1+1", "r0c2+2", "5"     ],
+#     ["r1c1+2", "r2c0+r1c0", "r0c2+1"],
+# ]
 # In the example above, calculate_value(2, 1) yields 10.
 
+# What if there was a circular reference?
 
+#        c0        c1        c2
+#    +---------+------------+---------+
+# r0 + 1       |  r2c0      +   4     |
+#    +---------+------------+---------+
+# r1 + r0c1 + 1| r0c2 + 2   |   5     |
+#    +---------+------------+---------+
+# r2 + r0c1    | r2c0 + r1c0| r0c2 + 1|
+#    +---------+------------+---------+
+
+circ_arr = [
+    ["1",      "r2c0",   "4"     ],
+    ["r0c1+1", "r0c2+2", "5"     ],
+    ["r0c1", "r2c0+r1c0", "r0c2+1"],
+]
+
+# r2c0 -> r0c1 and at the same time r0c1 -> r2c
+# calculating the value of a cell creates an infinite recursion loop
+# need to check if a cell is pointing to another cell and raise error if loop is found
+# similar to finding a loop in a linked list; each cell is a node
+ 
 def calculate_value(r,c):
+    cell = circ_arr[r][c]
+    print(cell), "cell"
 
-    total = 0
-    # print total, "start total" 
-    if input_arr[r][c].isdigit() == True: 
-        total = total + int(input_arr[r][c]) 
-        # print total, "integer cell"
-        # return total
+    # cell contains a number
+    if cell.isdigit():
+        return int(cell)
 
-    if type(input_arr[r][c]) == str:
-        cells = input_arr[r][c].split("+")
-        # print cells, "cells"
-        r_total = 0
-        for cell in cells:
-            if cell.isdigit() == True:
-                r_total = r_total + int(cell)
-                # print cell, "integer cell"
-                print total, "total"
-                print r_total, "r_total"
-            else:
-                # print cell
-                r = int(cell[1])
-                c = int(cell[3])
-                calculate_value(r,c)
-        # print total, "end total"
-        return total
+    # cell contains a single r,c reference
+    if "+" not in cell:
+        r = int(cell.split("c")[0][1:])
+        c = int(cell.split("c")[1])
+        print r,c, "r,c"
+
+        return calculate_value(r,c)
+
+    # cell contains (r,c + r,c) or (r,c + num) references
+    a,b = cell.split("+")
+
+    if a.isdigit():
+        a = int(a)
+
+    else:
+        r = int(str(a.split("c")[0][1:]))
+        c = int(a.split("c")[1])
+        a = calculate_value(r,c)
+
+    if b.isdigit():
+        b = int(b)
+
+    else:
+        r = int(b.split("c")[0][1:])
+        c = int(b.split("c")[1])
+        b = calculate_value(r,c)
+
+    return a + b 
 
 print calculate_value(2,1)
+
+
 

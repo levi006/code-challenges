@@ -61,25 +61,27 @@ def calculate_value(r,c):
         return calculate_value(r,c)
 
     # cell contains (r,c + r,c) or (r,c + num) references
-    a,b = cell.split("+")
+    #split cell into individual expressions
+    cell_a,cell_b = cell.split("+")
 
-    if a.isdigit():
-        a = int(a)
-
-    else:
-        r = int(str(a.split("c")[0][1:]))
-        c = int(a.split("c")[1])
-        a = calculate_value(r,c)
-
-    if b.isdigit():
-        b = int(b)
+    #evaluate a and b 
+    if cell_a.isdigit():
+        cell_a = int(cell_a)
 
     else:
-        r = int(b.split("c")[0][1:])
-        c = int(b.split("c")[1])
-        b = calculate_value(r,c)
+        r = int(str(cell_a.split("c")[0][1:]))
+        c = int(cell_a.split("c")[1])
+        cell_a = calculate_value(r,c)
 
-    return a + b 
+    if cell_b.isdigit():
+        cell_b = int(cell_b)
+
+    else:
+        r = int(cell_b.split("c")[0][1:])
+        c = int(cell_b.split("c")[1])
+        cell_b = calculate_value(r,c)
+
+    return cell_a + cell_b 
 
 print calculate_value(2,1)
 
